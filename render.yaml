@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: movie-bot
+    runtime: python
+    buildCommand: |
+      curl -sSL https://install.python-poetry.org | python3 -
+      export PATH="/opt/render/project/poetry/bin:$PATH"
+      poetry install
+    startCommand: |
+      export PATH="/opt/render/project/poetry/bin:$PATH"
+      poetry run python main.py
+    envVars:
+      - key: DISCORD_TOKEN
+        sync: false
+      - key: TMDB_TOKEN
+        sync: false
